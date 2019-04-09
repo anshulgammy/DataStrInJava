@@ -1,7 +1,8 @@
 package com.techbrunch.datastructure.ds.queue;
 
 public class SnowbirdLiftApp {
-	BasicQueue<Gad2Chair> gad2Lift = new BasicQueue<Gad2Chair>();
+	// BasicQueue<Gad2Chair> gad2Lift = new BasicQueue<Gad2Chair>();
+	ListQueue<Gad2Chair> gad2Lift = new ListQueue<Gad2Chair>();
 
 	public static void main(String[] args) {
 		SnowbirdLiftApp app = new SnowbirdLiftApp();
@@ -25,7 +26,7 @@ public class SnowbirdLiftApp {
 		//if the lift is unloaded again, an error should occur since no one is left on it
 		try {
 			unloadLift();
-		} catch (IllegalStateException t) {
+		} catch (Exception t) {
 			System.out.println("Can't unload any more skiers because the lift is empty: " + t.getMessage());
 		}
 	}

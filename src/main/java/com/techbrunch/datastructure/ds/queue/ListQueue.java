@@ -1,12 +1,15 @@
 package com.techbrunch.datastructure.ds.queue;
 
-public class BasicQueue<T> implements Queue<T> {
-	private T[] data;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListQueue<T> implements Queue<T> {
+	private List<T> data;
 	int front;
 	int end;
 
-	public BasicQueue() {
-		this.data = (T[]) new Object[100];
+	public ListQueue() {
+		this.data = new ArrayList<T>(100);
 		this.front = -1; // Queue is empty
 		this.end = -1; // Queue is empty
 	}
@@ -24,14 +27,14 @@ public class BasicQueue<T> implements Queue<T> {
 		if (size() == 0) {
 			front++;
 			end++;
-			this.data[end] = data;
-		} else if ((end + 1) % (this.data.length) == front) {
+			this.data.add(end, data);
+		} else if ((end + 1) % (100) == front) {
 			// check if the queue is full or not.
 			throw new IllegalArgumentException("Queue is full");
 		} else {
 			// the queue is neither empty nor the queue is full.
 			end++;
-			this.data[end] = data;
+			this.data.add(end, data);
 		}
 	}
 
@@ -41,14 +44,14 @@ public class BasicQueue<T> implements Queue<T> {
 			throw new IllegalArgumentException("Queue is empty");
 		} else if (front == 0 && end == 0) {
 			// checking if there is only one element left in the queue
-			final T itemToBeDequeued = this.data[front];
+			final T itemToBeDequeued = this.data.get(front);
 			// this.data[front] = null;
 			front = -1;
 			end = -1;
 			return itemToBeDequeued;
 
 		} else {
-			final T itemToBeDequeued = this.data[front];
+			final T itemToBeDequeued = this.data.get(front);
 			// this.data[front] = null;
 			front++;
 			return itemToBeDequeued;
@@ -62,7 +65,7 @@ public class BasicQueue<T> implements Queue<T> {
 			throw new IllegalArgumentException("Queue is empty");
 		} else {
 			for (front = 0; front < size(); front++) {
-				if (this.data[front].equals(data)) {
+				if (this.data.get(front).equals(data)) {
 					found = true;
 					break;
 				}
@@ -80,7 +83,7 @@ public class BasicQueue<T> implements Queue<T> {
 		}
 		while (pinPoint <= position) {
 			if (pinPoint == position) {
-				itemToAccess = this.data[pinPoint];
+				itemToAccess = this.data.get(pinPoint);
 				break;
 			}
 			pinPoint++;
